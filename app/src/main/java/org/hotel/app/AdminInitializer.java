@@ -33,7 +33,7 @@ public class AdminInitializer implements CommandLineRunner {
         }
 
         if (username.isBlank() || password.isBlank()) {
-            throw new IllegalStateException("Для создания первого администратора задайте HOTEL_ADMIN_USERNAME и HOTEL_ADMIN_PASSWORD в properties");
+            throw new IllegalStateException("Для создания первого администратора задайте HOTEL_ADMIN_USERNAME и HOTEL_ADMIN_PASSWORD в .env");
         }
 
         User user = new User();
