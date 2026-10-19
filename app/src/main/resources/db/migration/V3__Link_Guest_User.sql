@@ -1,0 +1,2 @@
+ALTER TABLE guests ADD COLUMN user_id VARCHAR(255);
+ALTER TABLE guests ADD CONSTRAINT fk_guest_user FOREIGN KEY (user_id) REFERENCES users(id);

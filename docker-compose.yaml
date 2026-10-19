@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - "${DATABASE_PORT}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  app:
+    build: .
+    restart: always
+    env_file:
+      - .env
+    environment:
+      DATABASE_HOST: db
+      DATABASE_PORT: "5432"
+      APP_PORT: "8080"
+    ports:
+      - "${APP_PORT}:8080"
+    depends_on:
+      - db
+    volumes:
+      - "${LOGS_DIR}:/application/logs"
+
+volumes:
+  pgdata:
